@@ -16,6 +16,7 @@ public enum SourceType {
 public protocol AudioItem {
     
     func getSourceUrl() -> String
+    func getId() -> String?
     func getArtist() -> String?
     func getTitle() -> String?
     func getAlbumTitle() -> String?
@@ -45,6 +46,8 @@ public class DefaultAudioItem: AudioItem {
     
     public var audioUrl: String
     
+    public var id: String?
+    
     public var artist: String?
     
     public var title: String?
@@ -55,8 +58,9 @@ public class DefaultAudioItem: AudioItem {
     
     public var artwork: UIImage?
     
-    public init(audioUrl: String, artist: String? = nil, title: String? = nil, albumTitle: String? = nil, sourceType: SourceType, artwork: UIImage? = nil) {
+    public init(audioUrl: String, id: String? = nil, artist: String? = nil, title: String? = nil, albumTitle: String? = nil, sourceType: SourceType, artwork: UIImage? = nil) {
         self.audioUrl = audioUrl
+        self.id = id
         self.artist = artist
         self.title = title
         self.albumTitle = albumTitle
@@ -66,6 +70,10 @@ public class DefaultAudioItem: AudioItem {
     
     public func getSourceUrl() -> String {
         return audioUrl
+    }
+    
+    public func getId() -> String? {
+        return id
     }
     
     public func getArtist() -> String? {
@@ -95,9 +103,9 @@ public class DefaultAudioItemTimePitching: DefaultAudioItem, TimePitching {
     
     public var pitchAlgorithmType: AVAudioTimePitchAlgorithm
     
-    public override init(audioUrl: String, artist: String?, title: String?, albumTitle: String?, sourceType: SourceType, artwork: UIImage?) {
+    public override init(audioUrl: String, id: String?, artist: String?, title: String?, albumTitle: String?, sourceType: SourceType, artwork: UIImage?) {
         self.pitchAlgorithmType = AVAudioTimePitchAlgorithm.lowQualityZeroLatency
-        super.init(audioUrl: audioUrl, artist: artist, title: title, albumTitle: albumTitle, sourceType: sourceType, artwork: artwork)
+        super.init(audioUrl: audioUrl, id: id, artist: artist, title: title, albumTitle: albumTitle, sourceType: sourceType, artwork: artwork)
     }
     
     public init(audioUrl: String, artist: String?, title: String?, albumTitle: String?, sourceType: SourceType, artwork: UIImage?, audioTimePitchAlgorithm: AVAudioTimePitchAlgorithm) {
@@ -115,9 +123,9 @@ public class DefaultAudioItemInitialTime: DefaultAudioItem, InitialTiming {
     
     public var initialTime: TimeInterval
     
-    public override init(audioUrl: String, artist: String?, title: String?, albumTitle: String?, sourceType: SourceType, artwork: UIImage?) {
+    public override init(audioUrl: String, id: String?, artist: String?, title: String?, albumTitle: String?, sourceType: SourceType, artwork: UIImage?) {
         self.initialTime = 0.0
-        super.init(audioUrl: audioUrl, artist: artist, title: title, albumTitle: albumTitle, sourceType: sourceType, artwork: artwork)
+        super.init(audioUrl: audioUrl, id: id, artist: artist, title: title, albumTitle: albumTitle, sourceType: sourceType, artwork: artwork)
     }
     
     public init(audioUrl: String, artist: String?, title: String?, albumTitle: String?, sourceType: SourceType, artwork: UIImage?, initialTime: TimeInterval) {
@@ -136,9 +144,9 @@ public class DefaultAudioItemAssetOptionsProviding: DefaultAudioItem, AssetOptio
     
     public var options: [String: Any]
     
-    public override init(audioUrl: String, artist: String?, title: String?, albumTitle: String?, sourceType: SourceType, artwork: UIImage?) {
+    public override init(audioUrl: String, id: String?, artist: String?, title: String?, albumTitle: String?, sourceType: SourceType, artwork: UIImage?) {
         self.options = [:]
-        super.init(audioUrl: audioUrl, artist: artist, title: title, albumTitle: albumTitle, sourceType: sourceType, artwork: artwork)
+        super.init(audioUrl: audioUrl, id: id, artist: artist, title: title, albumTitle: albumTitle, sourceType: sourceType, artwork: artwork)
     }
     
     public init(audioUrl: String, artist: String?, title: String?, albumTitle: String?, sourceType: SourceType, artwork: UIImage?, options: [String: Any]) {
