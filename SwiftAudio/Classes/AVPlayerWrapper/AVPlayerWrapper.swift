@@ -22,6 +22,7 @@ class AVPlayerWrapper: AVPlayerWrapperProtocol {
     
     struct Constants {
         static let assetPlayableKey = "playable"
+        static let assetDurationKey = "duration"
     }
     
     // MARK: - Properties
@@ -182,7 +183,7 @@ class AVPlayerWrapper: AVPlayerWrapperProtocol {
         
         if let pendingAsset = _pendingAsset {
             self._state = .loading
-            pendingAsset.loadValuesAsynchronously(forKeys: [Constants.assetPlayableKey], completionHandler: { [weak self] in
+            pendingAsset.loadValuesAsynchronously(forKeys: [Constants.assetPlayableKey, Constants.assetDurationKey], completionHandler: { [weak self] in
                 
                 guard let self = self else {
                     return
