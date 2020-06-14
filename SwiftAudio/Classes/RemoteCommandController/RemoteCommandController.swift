@@ -53,7 +53,7 @@ public class RemoteCommandController {
         commandTargetPointers.removeValue(forKey: command.id)
     }
     
-    private func enable(command: RemoteCommand) {
+    public func enable(command: RemoteCommand) {
         switch command {
         case .play: self.enableCommand(PlayBackCommand.play)
         case .pause: self.enableCommand(PlayBackCommand.pause)
@@ -73,7 +73,7 @@ public class RemoteCommandController {
         }
     }
     
-    private func disable(command: RemoteCommand) {
+    public func disable(command: RemoteCommand) {
         switch command {
         case .play: self.disableCommand(PlayBackCommand.play)
         case .pause: self.disableCommand(PlayBackCommand.pause)
